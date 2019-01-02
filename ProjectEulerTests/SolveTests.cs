@@ -25,5 +25,21 @@ namespace ProjectEuler.Tests
             string result = new Problem3().Solve();
             Assert.AreEqual("6857", result);
         }
+
+        [TestMethod]
+        public void SolveProblem4()
+        {
+            string result = new Problem4().Solve();
+            Assert.AreEqual("906609", result);
+        }
+
+        [TestMethod]
+        public void PalindromeTest()
+        {
+            var t = new Problem4();
+            Assert.IsTrue(t.IsPalindrome("909909"));
+            Assert.IsTrue(t.IsPalindrome("123321"));
+            Assert.IsFalse(t.IsPalindrome("123456"));
+        }
     }
 }
