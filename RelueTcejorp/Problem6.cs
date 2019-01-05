@@ -1,4 +1,8 @@
-﻿namespace ProjectEuler
+﻿using System.Collections.Generic;
+using System.Linq;
+using System;
+
+namespace ProjectEuler
 {
     /*
      * The sum of the squares of the first ten natural numbers is,
@@ -13,7 +17,11 @@
     {
         public string Solve()
         {
-            return "";
+            var numbers = Enumerable.Range(1, 100);
+            var sumOfSquares = numbers.Select(n => n * n).Sum();
+            var squareOfSums = numbers.Sum();
+            squareOfSums *= squareOfSums;
+            return (squareOfSums - sumOfSquares).ToString();
         }
     }
 }

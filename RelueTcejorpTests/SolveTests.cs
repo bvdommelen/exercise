@@ -46,7 +46,14 @@ namespace ProjectEuler.Tests
         public void SolveProblem6()
         {
             string result = new Problem6().Solve();
-            Assert.AreEqual("1234", result);
+            Assert.AreEqual("25164150", result);
+        }
+
+        [TestMethod]
+        public void SolveProblem7()
+        {
+            string result = new Problem7().Solve();
+            Assert.AreEqual("104743", result);
         }
 
         [TestMethod]
