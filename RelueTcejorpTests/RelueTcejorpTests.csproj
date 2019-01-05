@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProjectEuler\ProjectEuler.csproj">
+    <ProjectReference Include="..\RelueTcejorp\RelueTcejorp.csproj">
       <Project>{C561D52B-D56E-468D-A5DF-F506B98BED14}</Project>
-      <Name>ProjectEuler</Name>
+      <Name>RelueTcejorp</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
