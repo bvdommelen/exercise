@@ -92,6 +92,13 @@ namespace ProjectEuler.Tests
         }
 
         [TestMethod]
+        public void SolveProblem13()
+        {
+            string result = new Problem13().Solve();
+            Assert.AreEqual("5537376230", result);
+        }
+
+        [TestMethod]
         public void PalindromeTest()
         {
             var t = new Problem4();
