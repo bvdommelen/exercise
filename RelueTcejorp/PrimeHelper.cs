@@ -11,21 +11,27 @@ namespace ProjectEuler
         /// <returns>Collection of prime numbers smaller or equal the given value.</returns>
         public static IEnumerable<long> AllPrimes(long highestValueInclusive)
         {
-            var primeFactors = new List<long>() { 2 };
+            var primeFactors = new List<long>();
 
-            // Start with number 3 (the second prime)
-            int currentNumber = 3;
+            // Start with number 5 (the first 6k+-1 prime)
+            int currentNumber = 5;
 
             // Repeat until currentNumber > highestValueInclusive
             while (currentNumber <= highestValueInclusive)
             {
                 // Test if number is divisble by any so far found prime factors; if not it is itself prime
+                // Test 6k-1
                 if (!PrimeHelper.IsDivisbleByAny(currentNumber, primeFactors)) primeFactors.Add(currentNumber);
+                // Test 6k+1
+                if (!PrimeHelper.IsDivisbleByAny(currentNumber+2, primeFactors)) primeFactors.Add(currentNumber+2);
 
-                // Next number (skip even numbers; they're not prime anyway)
-                currentNumber += 2;
+                // Skip by 6
+                currentNumber += 6;
             }
 
+            // Add 2 and 3 (the only non-6k+-1 primes);
+            primeFactors.Add(2);
+            primeFactors.Add(3);
             return primeFactors;
         }
 

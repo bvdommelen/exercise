@@ -15,7 +15,7 @@ namespace ProjectEuler.Tests
         public void AllPrimesTest()
         {
             string result = string.Join(",", PrimeHelper.AllPrimes(20));
-            Assert.AreEqual("2,3,5,7,11,13,17,19", result);
+            Assert.AreEqual("5,7,11,13,17,19,2,3", result);
         }
 
         [TestMethod()]
