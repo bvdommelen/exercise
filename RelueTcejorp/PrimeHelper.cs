@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ProjectEuler
 {
@@ -11,7 +13,7 @@ namespace ProjectEuler
         /// <returns>Collection of prime numbers smaller or equal the given value.</returns>
         public static IEnumerable<long> AllPrimes(long highestValueInclusive)
         {
-            var primeFactors = new List<long>();
+            var primes = new List<long>();
 
             // Start with number 5 (the first 6k+-1 prime)
             int currentNumber = 5;
@@ -21,18 +23,59 @@ namespace ProjectEuler
             {
                 // Test if number is divisble by any so far found prime factors; if not it is itself prime
                 // Test 6k-1
-                if (!PrimeHelper.IsDivisbleByAny(currentNumber, primeFactors)) primeFactors.Add(currentNumber);
+                if (!PrimeHelper.IsDivisbleByAny(currentNumber, primes)) primes.Add(currentNumber);
                 // Test 6k+1
-                if (!PrimeHelper.IsDivisbleByAny(currentNumber+2, primeFactors)) primeFactors.Add(currentNumber+2);
+                if (!PrimeHelper.IsDivisbleByAny(currentNumber+2, primes)) primes.Add(currentNumber+2);
 
                 // Skip by 6
                 currentNumber += 6;
             }
 
             // Add 2 and 3 (the only non-6k+-1 primes);
-            primeFactors.Add(2);
-            primeFactors.Add(3);
-            return primeFactors;
+            primes.Add(2);
+            primes.Add(3);
+            return primes;
+        }
+
+        /// <summary>
+        /// Returns the collection of all prime factors of the given number.
+        /// </summary>
+        /// <param name="number">The number for which to get prime factors.</param>
+        /// <returns>Collection of prime numbers that are prime factors of the given number.</returns>
+        public static IEnumerable<long> PrimeFactors(long number)
+        {
+            return PrimeFactors(number, AllPrimes((long)Math.Floor(Math.Sqrt(number))));
+        }
+
+        public static IEnumerable<long> PrimeFactors(long number, IEnumerable<long> primeTable)
+        {
+            return primeTable.Where(f => number % f == 0);
+        }
+
+        /// <summary>
+        /// Returns the collection of all factors of the given number.
+        /// </summary>
+        /// <param name="number">The number for which to get prime factors.</param>
+        /// <returns>Collection of prime numbers that are prime factors of the given number; every prime factor is present as many times as it is a divider.</returns>
+        public static IEnumerable<long> AllFactors(long number)
+        {
+            return AllFactors(number, AllPrimes((long)Math.Floor(Math.Sqrt(number))));
+        }
+
+        public static IEnumerable<long> AllFactors(long number, IEnumerable<long> primeTable)
+        {
+            var primeFactors = PrimeFactors(number, primeTable);
+            var allFactors = new List<long>();
+            // To find how many times each prime factor is a divisor simply keep dividing by the given prime factor and test the remainder.
+            foreach (var f in primeFactors)
+            {
+                while (number % f == 0)
+                {
+                    number = number / f;
+                    allFactors.Add(f);
+                }
+            }
+            return allFactors;
         }
 
         /// <summary>
