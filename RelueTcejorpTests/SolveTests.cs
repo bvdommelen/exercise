@@ -99,6 +99,20 @@ namespace ProjectEuler.Tests
         }
 
         [TestMethod]
+        public void SolveProblem14()
+        {
+            string result = new Problem14().Solve();
+            Assert.AreEqual("837799", result);
+        }
+
+        [TestMethod]
+        public void ChainLengthTest()
+        {
+            string result = new Problem14().getChainLength(13).ToString();
+            Assert.AreEqual("10", result);
+        }
+
+        [TestMethod]
         public void PalindromeTest()
         {
             var t = new Problem4();
