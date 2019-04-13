@@ -120,6 +120,13 @@ namespace ProjectEuler.Tests
         }
 
         [TestMethod]
+        public void SolveProblem17()
+        {
+            string result = new Problem17().Solve();
+            Assert.AreEqual("21124", result);
+        }
+
+        [TestMethod]
         public void ChainLengthTest()
         {
             string result = new Problem14().getChainLength(13).ToString();
@@ -152,6 +159,12 @@ namespace ProjectEuler.Tests
         {
             var t = new Problem5();
             Assert.IsTrue(t.MergeFactors(new[] {2, 3, 5}, new[] {2, 2, 7}).SequenceEqual(new[] {2, 3, 5, 2, 7}));
+        }
+
+        [TestMethod]
+        public void Number342AsTextText()
+        {
+            Assert.AreEqual(23, Problem17.countLetters((342).ToText()));
         }
     }
 }
