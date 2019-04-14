@@ -56,5 +56,35 @@ namespace ProjectEuler
             new[] { 63,66,04,68,89,53,67,30,73,16,69,87,40,31 },
             new[] { 04,62,98,27,23,09,70,98,73,93,38,53,60,04,23 }
         };
+
+        public string Solve()
+        {
+            // Start at the bottom (current top is second to last row)
+            int currentTop = data.Length - 2;
+            // Initial aggregate bottom data is the last row
+            IEnumerable<int> aggregateBottom = data[currentTop + 1];
+            // Continue until current top < 0
+            while (currentTop >= 0)
+            {
+                // Aggregate top from row at current top and aggregate of bottom below
+                var aggregateTop = CalculateAggregateValues(data[currentTop], aggregateBottom);
+                // Decrease current top and set new aggregate bottom data set
+                currentTop--;
+                aggregateBottom = aggregateTop;
+            }
+            // Resulting aggregate bottom should have one entry, return the value of this entry
+            return aggregateBottom.First().ToString();
+        }
+
+        public static IEnumerable<int> CalculateAggregateValues(IEnumerable<int> top, IEnumerable<int> bottom)
+        {
+            // Abort if bottom not one bigger than top
+            if (top.Count() != bottom.Count() - 1) return new List<int>();
+            // Generate top-to-left and top-to-right results
+            var leftSideResults = top.Zip(bottom, (t, b) => t + b);
+            var rightSideResults = top.Zip(bottom.Skip(1), (t, b) => t + b);
+            // Generate final results by taken largest of the two
+            return leftSideResults.Zip(rightSideResults, (l, r) => l > r ? l : r);
+        }
     }
 }

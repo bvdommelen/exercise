@@ -127,6 +127,13 @@ namespace ProjectEuler.Tests
         }
 
         [TestMethod]
+        public void SolveProblem18()
+        {
+            string result = new Problem18().Solve();
+            Assert.AreEqual("1074", result);
+        }
+
+        [TestMethod]
         public void ChainLengthTest()
         {
             string result = new Problem14().getChainLength(13).ToString();
