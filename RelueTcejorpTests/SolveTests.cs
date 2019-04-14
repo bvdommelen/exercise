@@ -148,6 +148,15 @@ namespace ProjectEuler.Tests
         }
 
         [TestMethod]
+        public void SolveProblem21()
+        {
+            // first five are <10000 : (220, 284), (1184, 1210), (2620, 2924), (5020, 5564), (6232, 6368) should yield
+            string expected = (220 + 284 + 1184 + 1210 + 2620 + 2924 + 5020 + 5564 + 6232 + 6368).ToString();
+            string result = new Problem21().Solve();
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
         public void ChainLengthTest()
         {
             string result = new Problem14().getChainLength(13).ToString();
